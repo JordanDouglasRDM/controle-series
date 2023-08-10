@@ -2,16 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Serie;
+use App\Http\Requests\SeriesFormRequest;
+use App\Models\Episode;
+use App\Models\Season;
+use App\Models\Series;
+use App\Repositories\EloquentSeriesRepository;
+use App\Repositories\SeriesRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SeriesController extends Controller
 {
+    public function __construct(private SeriesRepository $repository)
+    {
+    }
+
     public function index()
     {
-        $series = Serie::query()->orderBy('nome')->get();
+        $series = Series::with('seasons')->get();
         $mensagemSucesso = session('mensagem.sucesso');
-        return view('series.index')->with('series', $series)
+        return view('series.index')
+            ->with('series', $series)
             ->with('mensagemSucesso', $mensagemSucesso);
     }
 
@@ -21,27 +32,27 @@ class SeriesController extends Controller
 
     }
 
-    public function store(Request $request)
+    public function store(SeriesFormRequest $request)
     {
-        $serie = Serie::create($request->all());
+        $serie = $this->repository->add($request);
         return to_route('series.index')
             ->with('mensagem.sucesso', "Série '{$serie->nome}' adicionada com sucesso!");
     }
 
-    public function destroy(Serie $series)
+    public function destroy(Series $series)
     {
         $series->delete();
-        //Serie::destroy($request->route()); para teste de parâmetros enviados
+        //Series::destroy($request->route()); para teste de parâmetros enviados
         return to_route('series.index')
             ->with('mensagem.sucesso', "Série '{$series->nome}' excluida com sucesso!");
     }
 
-    public function edit(Serie $series)
+    public function edit(Series $series)
     {
         return view('series.edit')->with('serie', $series);
     }
 
-    public function update(Serie $series, Request $request)
+    public function update(Series $series, SeriesFormRequest $request)
     {
         $series->fill($request->all());
         $series->save();
