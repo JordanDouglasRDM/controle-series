@@ -1,7 +1,4 @@
 <x-layout title="Episódios" :mensagem-sucesso="$mensagemSucesso">
-    <a href="{{ route('seasons.index') }}">
-        Voltar
-    </a><br>
     <form method="post">
         @csrf
         <button class="btn btn-primary mt-2 mb-2">Salvar</button>

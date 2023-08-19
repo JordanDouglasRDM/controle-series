@@ -1,6 +1,4 @@
 <x-layout title="Séries" :mensagem-sucesso="$mensagemSucesso">
-
-    <a href="{{ route('series.create') }}" class="btn btn-dark mb-2">Nova série</a>
     <ul class="list-group">
         @foreach ($series as $serie)
             <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -22,5 +20,4 @@
             </li>
         @endforeach
     </ul>
-
 </x-layout>

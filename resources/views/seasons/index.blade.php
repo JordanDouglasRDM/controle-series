@@ -1,8 +1,5 @@
 <x-layout title="Temporadas de '{!! $series->nome !!}'">
     <ul class="list-group">
-        <a href="{{ route('series.index') }}">
-            Voltar
-        </a>
         @foreach ($seasons as $season)
             <li class="list-group-item d-flex justify-content-between align-items-center">
                 <a href="{{ route('episodes.index', $season->id) }}">

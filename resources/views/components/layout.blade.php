@@ -9,25 +9,27 @@
     <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
 </head>
 <body>
-<div class="container">
-    <h1>{{ $title }}</h1>
+<x-sidebar>
+    <div class="container">
+        <h1>{{ $title }}</h1>
 
-    @isset($mensagemSucesso)
-        <div class="alert alert-success">
-            {{ $mensagemSucesso }}
-        </div>
-    @endisset
+        @isset($mensagemSucesso)
+            <div class="alert alert-success">
+                {{ $mensagemSucesso }}
+            </div>
+        @endisset
 
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-    {{ $slot }}
-</div>
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        {{ $slot }}
+    </div>
+</x-sidebar>
 </body>
 </html>

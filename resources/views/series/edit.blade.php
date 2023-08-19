@@ -10,5 +10,4 @@
         </div>
         <button type="submit" class="btn btn-primary mb-2">Atualizar</button>
     </form>
-    <a href="{{ route('series.index') }}" class="btn btn-secondary mb-2">Listar cadastradas</a>
 </x-layout>
