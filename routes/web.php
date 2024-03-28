@@ -19,12 +19,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', function () {
+    return redirect('/series');
+});
+
 //rotas com autenticação
 Route::middleware('autenticador')->group(function () {
 
-    Route::get('/', function () {
-        return redirect('/series');
-    });
     Route::get('/logout', [LoginController::class, 'destroy'])->name('logout');
 
     Route::get('/register', [UsersController::class, 'create'])->name('users.create');
