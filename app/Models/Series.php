@@ -16,10 +16,6 @@ class Series extends Model
         return $this->hasMany(Season::class, 'series_id');
     }
 
-    public function episodes()
-    {
-        return $this->hasMany(Episode::class,'episodes_id');
-    }
     protected static function booted()
     {
         self::addGlobalScope('ordered', function (Builder $queryBuilder) {

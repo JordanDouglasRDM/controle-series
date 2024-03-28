@@ -33,6 +33,7 @@ class EloquentSeriesRepository implements SeriesRepository
                 }
             }
             Episode::insert($episodes);
+
             return $serie;
         });
     }

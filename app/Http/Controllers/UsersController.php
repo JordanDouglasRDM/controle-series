@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-class UsersController extends Controller
+class UsersController
 {
     public function create()
     {
@@ -20,7 +20,6 @@ class UsersController extends Controller
         $data['password'] = Hash::make($data['password']);
 
         $user = User::create($data);
-
         Auth::login($user);
 
         return to_route('series.index');

@@ -1,8 +1,11 @@
-<div id="mySidebar" class="sidebar d-flex">
+<div id="mySidebar" class="sidebar">
     <a href="javascript:void(0)" class="closebtn meus-links" onclick="closeNav()">×</a>
     <a id="btn-side-home" class="meus-links" href="{{ route('series.index') }}">Home</a>
     @auth()
-        <a href="{{ route('logout') }}" class="btn btn-outline-danger align-self-end mb-5">Sair</a>
+        <form action="{{ route('logout') }}" method="post" class="d-flex">
+            @csrf
+            <input type="submit" value="Sair" class="btn btn-outline-danger align-self-end mb-5">
+        </form>
     @endauth
 
     @guest

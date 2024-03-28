@@ -8,8 +8,10 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
         Schema::table('episodes', function (Blueprint $table) {
             $table->boolean('watched')->default(false);
@@ -18,8 +20,10 @@ return new class extends Migration
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
         Schema::table('episodes', function (Blueprint $table) {
             $table->dropColumn('watched');
