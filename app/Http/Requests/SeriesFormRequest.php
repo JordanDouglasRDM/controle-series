@@ -24,7 +24,8 @@ class SeriesFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'nome' => ['required', 'min:2'],
+            'nome' => 'required|min:2',
+            'cover' => 'image|nullable|mimes:jpeg,png,jpg,gif'
         ];
     }
 }
