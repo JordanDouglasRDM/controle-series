@@ -36,12 +36,11 @@ class SeriesController extends Controller
 
     public function store(SeriesFormRequest $request)
     {
-        if ($request->file('cover')) {
-            $coverPath = $request->file('cover')
-                ->store('series_cover', 'public');
+        $coverPath = $request->hasFile('cover')
+            ? $coverPath = $request->file('cover')->store('series_cover', 'public')
+            : null;
 
-            $request->coverPath = $coverPath;
-        }
+        $request->coverPath = $coverPath;
 
         /**@var Series $serie */
         $serie = $this->repository->add($request);
@@ -54,10 +53,16 @@ class SeriesController extends Controller
         );
 
         return to_route('series.index')
-            ->with('mensagem.sucesso', "Série '{$serie->nome}' adicionada com sucesso");
+            ->with('mensagem.sucesso', "Série '
+{
+$serie->nome
+}
+
+' adicionada com sucesso");
     }
 
-    public function destroy(Series $series)
+    public
+    function destroy(Series $series)
     {
         $series->delete();
 
@@ -67,12 +72,14 @@ class SeriesController extends Controller
             ->with('mensagem.sucesso', "Série '{$series->nome}' removida com sucesso");
     }
 
-    public function edit(Series $series)
+    public
+    function edit(Series $series)
     {
         return view('series.edit')->with('serie', $series);
     }
 
-    public function update(Series $series, SeriesFormRequest $request)
+    public
+    function update(Series $series, SeriesFormRequest $request)
     {
         $series->fill($request->all());
         $series->save();
