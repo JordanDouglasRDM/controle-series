@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\SeriesCreatedEvent;
-use App\Http\Requests\SeriesFormRequest;
+use App\Http\Requests\SeriesRequest;
 use App\Jobs\DeleteSeriesCoverJob;
 use App\Mail\SeriesCreated;
 use App\Models\Series;
@@ -34,7 +34,7 @@ class SeriesController extends Controller
         return view('series.create');
     }
 
-    public function store(SeriesFormRequest $request)
+    public function store(SeriesRequest $request)
     {
         $coverPath = $request->hasFile('cover')
             ? $coverPath = $request->file('cover')->store('series_cover', 'public')
@@ -79,7 +79,7 @@ $serie->nome
     }
 
     public
-    function update(Series $series, SeriesFormRequest $request)
+    function update(Series $series, SeriesRequest $request)
     {
         $series->fill($request->all());
         $series->save();
